@@ -5,20 +5,20 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.3
+  sdk: ">=3.5.3 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  sqflite: ^2.4.0  # Conserve la version la plus récente de sqflite
-  path: ^1.8.3
+  path: ^1.9.0
   cupertino_icons: ^1.0.8
   http: ^1.2.2
+  mysql1: ^0.20.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0 # Mise à jour disponible pour la version 5.0.0
 
 flutter:
   uses-material-design: true

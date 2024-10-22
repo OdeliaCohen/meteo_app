@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
-import 'views/home_view.dart';  // Importe la nouvelle vue d'accueil
+import 'services/db_service.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final DatabaseService dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather Alert App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+      title: 'Dart MySQL Example',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Connexion MySQL avec Dart'),
+        ),
+        body: Center(
+          child: FutureBuilder(
+            future: dbService.fetchData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Erreur : ${snapshot.error}');
+              } else {
+                return Text('Données récupérées avec succès !');
+              }
+            },
+          ),
+        ),
       ),
-      home: HomeView(),  // Définit HomeView comme la vue principale au démarrage
     );
   }
 }
